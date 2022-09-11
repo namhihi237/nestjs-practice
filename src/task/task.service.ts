@@ -35,7 +35,6 @@ export class TaskService {
   updateStatus(id: string, status: TaskStatus): Task {
     const task = this.getTaskById(id);
     task.status = status;
-    console.log(task);
 
     return task;
   }
