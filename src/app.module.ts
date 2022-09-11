@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskModule } from './task/task.module';
+import { Task } from './task/task.entity';
+import { DataSource } from 'typeorm';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -16,8 +18,11 @@ import { TaskModule } from './task/task.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [],
+        entities: [Task],
         synchronize: true,
+        autoLoadEntities: true,
+        logging:
+          configService.get('ENVIRONMENT') === 'development' ? true : false,
       }),
       inject: [ConfigService],
     }),
