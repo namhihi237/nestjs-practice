@@ -1,4 +1,4 @@
-import { Repository, Like } from 'typeorm';
+import { Repository } from 'typeorm';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';

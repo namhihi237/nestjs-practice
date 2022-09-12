@@ -5,7 +5,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
-import { DataSource } from 'typeorm';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -19,7 +18,9 @@ import { DataSource } from 'typeorm';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         entities: [Task],
+        migrations: ['src/migrations/*.ts', 'dist/migrations/*{.ts, .js}'],
         synchronize: true,
+        migrationsRun: true,
         autoLoadEntities: true,
         logging:
           configService.get('ENVIRONMENT') === 'development' ? true : false,
