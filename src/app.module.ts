@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -28,6 +30,8 @@ import { Task } from './task/task.entity';
       inject: [ConfigService],
     }),
     TaskModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
